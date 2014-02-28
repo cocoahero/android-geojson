@@ -6,9 +6,12 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.cocoahero.android.geojson.util.ListUtils;
 
-public class PositionList {
+public class PositionList implements Parcelable {
 
     // ------------------------------------------------------------------------
     // Instance Variables
@@ -32,6 +35,36 @@ public class PositionList {
         for (int i = 0; i < positions.length; i++) {
             this.addPosition(new Position(positions[i]));
         }
+    }
+
+    protected PositionList(Parcel parcel) {
+        this.setPositions(parcel.createTypedArrayList(Position.CREATOR));
+    }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<PositionList> CREATOR = new Parcelable.Creator<PositionList>() {
+        @Override
+        public PositionList createFromParcel(Parcel in) {
+            return new PositionList(in);
+        }
+
+        @Override
+        public PositionList[] newArray(int size) {
+            return new PositionList[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.mPositions);
     }
 
     // ------------------------------------------------------------------------
