@@ -56,7 +56,7 @@ catch (JSONException e) {
 }
 ````
 
-The returned object instance will be a subclass of GeoJSONObject, depending on the `type` property of the GeoJSON.
+The returned object instance will be a subclass of [GeoJSONObject](./src/com/cocoahero/android/geojson/GeoJSONObject.java), depending on the `type` property of the GeoJSON.
 
 * `"type": "Feature"` => [Feature](./src/com/cocoahero/android/geojson/Feature.java)
 * `"type": "FeatureCollection"` => [FeatureCollection](./src/com/cocoahero/android/geojson/FeatureCollection.java)
