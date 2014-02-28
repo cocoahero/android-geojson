@@ -48,6 +48,10 @@ public class Feature extends GeoJSONObject {
         this.mProperties = json.optJSONObject(JSON_PROPERTIES);
     }
 
+    public Feature(Geometry geometry) {
+        this.mGeometry = geometry;
+    }
+
     // ------------------------------------------------------------------------
     // Public Methods
     // ------------------------------------------------------------------------

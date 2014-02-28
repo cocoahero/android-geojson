@@ -30,6 +30,10 @@ public class Point extends Geometry {
         this.setPosition(position);
     }
 
+    public Point(Position position) {
+        this.setPosition(position);
+    }
+
     public Point(double latitude, double longitude) {
         this.mPosition = new Position(latitude, longitude);
     }
