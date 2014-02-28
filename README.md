@@ -2,6 +2,16 @@
 
 A complete GeoJSON implementation for Android.
 
+### Table of Contents
+
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Sample Usage](#sample-usage)
+  * [Parsing GeoJSON](#parsing-geojson)
+  * [Creating GeoJSON](#generating-geojson)
+
+---
+
 ## Requirements
 * Android SDK 8 or Higher
 
