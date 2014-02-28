@@ -10,19 +10,17 @@ A complete GeoJSON implementation for Android.
   * [Parsing GeoJSON](#parsing-geojson)
   * [Creating GeoJSON](#generating-geojson)
 
----
-
-## Requirements
+### Requirements
 * Android SDK 8 or Higher
 
-## Installation
+### Installation
 1. Download or `git clone` this library into your application project.
 2. Import the library into your Eclipse workspace.
 3. Add the newly imported Android Library Project as a dependency to your application project.
 
-## Sample Usage
+### Sample Usage
 
-### Parsing GeoJSON
+#### Parsing GeoJSON
 
 If you have existing GeoJSON that you need to parse, you have three source options with this library:
 
@@ -78,7 +76,7 @@ The returned object instance will be a subclass of [GeoJSONObject](./src/com/coc
 * `"type": "MultiPolygon"` => [MultiPolygon](./src/com/cocoahero/android/geojson/MultiPolygon.java)
 * `"type": "GeometryCollection"` => [GeometryCollection](./src/com/cocoahero/android/geojson/GeometryCollection.java)
 
-### Generating GeoJSON
+#### Creating GeoJSON
 
 Parsing existing GeoJSON is only half the fun! Why not create new GeoJSON?! Simply create a new instance of which ever GeoJSONObject sub-type you would like, then call `#toJSON` on it to get a properly formatted `JSONObject` instance.
 
