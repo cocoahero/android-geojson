@@ -22,6 +22,26 @@ If you have existing GeoJSON that you need to parse, you have three source optio
 
 Once you have your GeoJSON in one of the above formats, simply pass it to `GeoJSON#parse`.
 
+##### String
+````java
+String string; // A string containing GeoJSON
+
+try {
+    GeoJSONObject geoJSON; = GeoJSON.parse(string);
+}
+catch (JSONException e) {
+    e.printStackTrace();
+}
+````
+
+##### JSONObject
+````java
+JSONObject json; // A JSONObject formatted as GeoJSON
+
+GeoJSONObject geoJSON; = GeoJSON.parse(json);
+````
+
+##### InputStream
 ````java
 InputStream stream; // An InputStream pointing to GeoJSON
 
@@ -34,23 +54,6 @@ catch (IOException e) {
 catch (JSONException e) {
     e.printStackTrace();
 }
-````
-
-````java
-String string; // A string containing GeoJSON
-
-try {
-    GeoJSONObject geoJSON; = GeoJSON.parse(string);
-}
-catch (JSONException e) {
-    e.printStackTrace();
-}
-````
-
-````java
-JSONObject json; // A JSONObject formatted as GeoJSON
-
-GeoJSONObject geoJSON; = GeoJSON.parse(json);
 ````
 
 The returned object instance will be a subclass of GeoJSONObject, depending on the `type` property of the GeoJSON.
