@@ -8,7 +8,7 @@ A complete GeoJSON implementation for Android.
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
   * [Parsing GeoJSON](#parsing-geojson)
-  * [Creating GeoJSON](#generating-geojson)
+  * [Creating GeoJSON](#creating-geojson)
 
 ### Requirements
 * Android SDK 8 or Higher
@@ -19,6 +19,8 @@ A complete GeoJSON implementation for Android.
 3. Add the newly imported Android Library Project as a dependency to your application project.
 
 ### Sample Usage
+
+Whether you need to parse existing GeoJSON from a file or web server, or create new GeoJSON from user input, this library has got you covered.
 
 #### Parsing GeoJSON
 
