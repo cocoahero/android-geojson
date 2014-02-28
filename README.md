@@ -90,3 +90,5 @@ feature.setProperties(new JSONObject());
 // Convert to formatted JSONObject
 JSONObject geoJSON = feature.toJSON();
 ````
+
+The resulting GeoJSON can be seen [here](https://gist.github.com/cocoahero/7ce6bc203d47d7a64438#file-sample-feature-geojson).
