@@ -18,7 +18,7 @@ A complete GeoJSON implementation for Android.
 2. Import the library into your Eclipse workspace.
 3. Add the newly imported Android Library Project as a dependency to your application project.
 
-If you need help, try checking out the [offical Android documentation on library projects](http://developer.android.com/tools/projects/projects-eclipse.html#ReferencingLibraryProject).
+If you need help, try checking out the [official Android documentation on library projects](http://developer.android.com/tools/projects/projects-eclipse.html#ReferencingLibraryProject).
 
 ### Sample Usage
 
