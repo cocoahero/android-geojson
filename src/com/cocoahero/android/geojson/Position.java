@@ -6,8 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Position {
+public class Position implements Parcelable {
 
     // ------------------------------------------------------------------------
     // Private Constants
@@ -62,6 +64,36 @@ public class Position {
         this.mStorage[LAT_IDX] = location.getLatitude();
         this.mStorage[LON_IDX] = location.getLongitude();
         this.mStorage[ALT_IDX] = location.getAltitude();
+    }
+
+    private Position(Parcel parcel) {
+        this(parcel.createDoubleArray());
+    }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<Position> CREATOR = new Parcelable.Creator<Position>() {
+        @Override
+        public Position createFromParcel(Parcel in) {
+            return new Position(in);
+        }
+
+        @Override
+        public Position[] newArray(int size) {
+            return new Position[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDoubleArray(this.mStorage);
     }
 
     // ------------------------------------------------------------------------
