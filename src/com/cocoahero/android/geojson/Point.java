@@ -26,6 +26,18 @@ public class Point extends Geometry {
         this.setPosition(json.optJSONArray(JSON_COORDINATES));
     }
 
+    public Point(JSONArray position) {
+        this.setPosition(position);
+    }
+
+    public Point(double latitude, double longitude) {
+        this.mPosition = new Position(latitude, longitude);
+    }
+
+    public Point(double latitude, double longitude, double altitude) {
+        this.mPosition = new Position(latitude, longitude, altitude);
+    }
+
     // ------------------------------------------------------------------------
     // Public Methods
     // ------------------------------------------------------------------------
