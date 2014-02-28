@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class MultiPolygon extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -28,6 +31,22 @@ public class MultiPolygon extends Geometry {
 
         this.setPolygons(json.optJSONArray(JSON_COORDINATES));
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<MultiPolygon> CREATOR = new Creator<MultiPolygon>() {
+        @Override
+        public MultiPolygon createFromParcel(Parcel in) {
+            return (MultiPolygon) readParcel(in);
+        }
+
+        @Override
+        public MultiPolygon[] newArray(int size) {
+            return new MultiPolygon[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

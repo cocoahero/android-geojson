@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class MultiPoint extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -31,6 +34,22 @@ public class MultiPoint extends Geometry {
     public MultiPoint(JSONArray positions) {
         this.setPositions(positions);
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<MultiPoint> CREATOR = new Creator<MultiPoint>() {
+        @Override
+        public MultiPoint createFromParcel(Parcel in) {
+            return (MultiPoint) readParcel(in);
+        }
+
+        @Override
+        public MultiPoint[] newArray(int size) {
+            return new MultiPoint[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

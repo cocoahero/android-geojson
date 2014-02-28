@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class GeometryCollection extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -42,6 +45,22 @@ public class GeometryCollection extends Geometry {
             }
         }
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<GeometryCollection> CREATOR = new Creator<GeometryCollection>() {
+        @Override
+        public GeometryCollection createFromParcel(Parcel in) {
+            return (GeometryCollection) readParcel(in);
+        }
+
+        @Override
+        public GeometryCollection[] newArray(int size) {
+            return new GeometryCollection[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

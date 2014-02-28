@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class MultiLineString extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -32,6 +35,22 @@ public class MultiLineString extends Geometry {
     public MultiLineString(JSONArray lineStrings) {
         this.setLineStrings(lineStrings);
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<MultiLineString> CREATOR = new Creator<MultiLineString>() {
+        @Override
+        public MultiLineString createFromParcel(Parcel in) {
+            return (MultiLineString) readParcel(in);
+        }
+
+        @Override
+        public MultiLineString[] newArray(int size) {
+            return new MultiLineString[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

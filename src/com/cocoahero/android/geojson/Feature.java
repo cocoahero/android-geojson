@@ -3,6 +3,9 @@ package com.cocoahero.android.geojson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.cocoahero.android.geojson.util.JSONUtils;
 
 public class Feature extends GeoJSONObject {
@@ -51,6 +54,22 @@ public class Feature extends GeoJSONObject {
     public Feature(Geometry geometry) {
         this.mGeometry = geometry;
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<Feature> CREATOR = new Creator<Feature>() {
+        @Override
+        public Feature createFromParcel(Parcel in) {
+            return (Feature) readParcel(in);
+        }
+
+        @Override
+        public Feature[] newArray(int size) {
+            return new Feature[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

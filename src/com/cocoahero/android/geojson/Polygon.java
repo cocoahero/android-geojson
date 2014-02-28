@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Polygon extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -36,6 +39,22 @@ public class Polygon extends Geometry {
     public Polygon(JSONArray rings) {
         this.setRings(rings);
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<Polygon> CREATOR = new Creator<Polygon>() {
+        @Override
+        public Polygon createFromParcel(Parcel in) {
+            return (Polygon) readParcel(in);
+        }
+
+        @Override
+        public Polygon[] newArray(int size) {
+            return new Polygon[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

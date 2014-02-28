@@ -4,6 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Point extends Geometry {
 
     // ------------------------------------------------------------------------
@@ -41,6 +44,22 @@ public class Point extends Geometry {
     public Point(double latitude, double longitude, double altitude) {
         this.mPosition = new Position(latitude, longitude, altitude);
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<Point> CREATOR = new Creator<Point>() {
+        @Override
+        public Point createFromParcel(Parcel in) {
+            return (Point) readParcel(in);
+        }
+
+        @Override
+        public Point[] newArray(int size) {
+            return new Point[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods

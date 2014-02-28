@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class FeatureCollection extends GeoJSONObject {
 
     // ------------------------------------------------------------------------
@@ -42,6 +45,22 @@ public class FeatureCollection extends GeoJSONObject {
             }
         }
     }
+
+    // ------------------------------------------------------------------------
+    // Parcelable Interface
+    // ------------------------------------------------------------------------
+
+    public static final Parcelable.Creator<FeatureCollection> CREATOR = new Creator<FeatureCollection>() {
+        @Override
+        public FeatureCollection createFromParcel(Parcel in) {
+            return (FeatureCollection) readParcel(in);
+        }
+
+        @Override
+        public FeatureCollection[] newArray(int size) {
+            return new FeatureCollection[size];
+        }
+    };
 
     // ------------------------------------------------------------------------
     // Public Methods
