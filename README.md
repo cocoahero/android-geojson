@@ -68,3 +68,25 @@ The returned object instance will be a subclass of [GeoJSONObject](./src/com/coc
 * `"type": "MultiPolygon"` => [MultiPolygon](./src/com/cocoahero/android/geojson/MultiPolygon.java)
 * `"type": "GeometryCollection"` => [GeometryCollection](./src/com/cocoahero/android/geojson/GeometryCollection.java)
 
+### Generating GeoJSON
+
+Parsing existing GeoJSON is only half the fun! Why not create new GeoJSON?! Simply create a new instance of which ever GeoJSONObject sub-type you would like, then call `#toJSON` on it to get a properly formatted `JSONObject` instance.
+
+For example, the following sample code creates a GeoJSON Feature with a Point geometry.
+
+````java
+// Create geometry
+Point point = new Point(38.889462878011365, -77.03525304794312);
+
+// Create feature with geometry
+Feature feature = new Feature(point);
+
+// Set optional feature identifier
+feature.setIdentifier("MyIdentifier");
+
+// Set optional feature properties
+feature.setProperties(new JSONObject());
+
+// Convert to formatted JSONObject
+JSONObject geoJSON = feature.toJSON();
+````
