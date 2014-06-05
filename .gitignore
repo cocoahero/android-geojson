@@ -27,4 +27,8 @@ tmp/**
 # Ant Local Configuration
 local.properties
 
+# Android Studio
+*.iml
+.idea/
+
 *.keystore
