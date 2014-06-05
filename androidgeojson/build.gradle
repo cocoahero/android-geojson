@@ -3,17 +3,4 @@ apply plugin: 'android-library'
 android {
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
-
-    defaultConfig {
-        packageName "com.cocoahero.android.geojson"
-        minSdkVersion 8
-        targetSdkVersion 19
-    }
-
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
 }
