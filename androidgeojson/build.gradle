@@ -1,6 +1,89 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'android-library'
 
 android {
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
+}
+
+def isReleaseBuild() {
+    return LIBRARY_VERSION.contains("SNAPSHOT") == false
+}
+
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL :
+            "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+}
+
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL :
+            "https://oss.sonatype.org/content/repositories/snapshots/"
+}
+
+def getRepositoryUsername() {
+    return hasProperty('USERNAME') ? USERNAME :
+            (hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : "")
+}
+
+def getRepositoryPassword() {
+    return hasProperty('PASSWORD') ? PASSWORD :
+            (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                pom.groupId = POM_GROUP_ID
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = LIBRARY_VERSION
+
+                repository(url: getReleaseRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(),
+                            password: getRepositoryPassword())
+                }
+
+                snapshotRepository(url: getSnapshotRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(),
+                            password: getRepositoryPassword())
+                }
+
+                pom.project {
+                    name "Android GeoJSON"
+                    packaging "aar"
+                    description "Android GeoJSON Library"
+                    url "https://github.com/cocoahero/android-geojson"
+
+                    scm {
+                        url "https://github.com/cocoahero/android-geojson"
+                        connection "scm:git:git@github.com:cocoahero/android-geojson.git"
+                        developerConnection "scm:git:git@github.com:cocoahero/android-geojson.git"
+                    }
+
+                    licenses {
+                        license {
+                            name "The MIT License"
+                            url "https://github.com/cocoahero/android-geojson/blob/master/LICENSE.md"
+                            distribution "repo"
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id "cocoahero"
+                            name "Jonathan Baker"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
 }
