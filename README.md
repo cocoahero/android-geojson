@@ -14,11 +14,25 @@ A complete GeoJSON implementation for Android.
 * Android SDK 8 or Higher
 
 ### Installation
-1. Download or `git clone` this library into your application project.
-2. Import the library into your Eclipse workspace.
-3. Add the newly imported Android Library Project as a dependency to your application project.
 
-If you need help, try checking out the [official Android documentation on library projects](http://developer.android.com/tools/projects/projects-eclipse.html#ReferencingLibraryProject).
+#### Android Studio / Gradle
+
+````groovy
+dependencies {
+  compile 'com.cocoahero.android:geojson:1.0.+@aar'
+}
+````
+
+#### Maven
+
+````xml
+<dependency>
+  <groupId>com.cocoahero.android</groupId>
+  <artifactId>geojson</artifactId>
+  <version>1.0.0</version>
+  <type>aar</type>
+</dependency>
+````
 
 ### Sample Usage
 
