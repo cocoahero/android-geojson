@@ -1,13 +1,13 @@
 package com.cocoahero.android.geojson;
 
-import java.io.IOException;
-import java.io.InputStream;
+import com.cocoahero.android.geojson.util.JSONUtils;
+import com.cocoahero.android.geojson.util.StreamUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cocoahero.android.geojson.util.JSONUtils;
-import com.cocoahero.android.geojson.util.StreamUtils;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class GeoJSON {
 
@@ -37,6 +37,32 @@ public class GeoJSON {
     // Class Methods
     // ------------------------------------------------------------------------
 
+    /**
+     * Parses the given JSONObject as GeoJSON and returns a concrete subclass of {@link
+     * GeoJSONObject} corresponding to the type of the root object.
+     * <p/>
+     * Example:
+     * <p/>
+     * <pre>
+     * {
+     *     "type": "Feature",
+     *     "geometry": {
+     *         "type": "Point",
+     *         "coordinates": [125.6, 10.1]
+     *     },
+     * }
+     * </pre>
+     * <p/>
+     * The above GeoJSON would return an instance of {@link Feature}.
+     *
+     * @param json
+     *         A {@link JSONObject} to parse as GeoJSON
+     *
+     * @return A concrete subclass instance of {@link GeoJSONObject}.
+     *
+     * @throws IllegalArgumentException
+     *         If the given object is not a valid GeoJSON type.
+     */
     public static GeoJSONObject parse(JSONObject json) {
         String type = JSONUtils.optString(json, GeoJSONObject.JSON_TYPE);
 
