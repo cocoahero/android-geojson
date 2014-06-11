@@ -5,10 +5,21 @@ apply plugin: 'android-library'
 android {
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 19
+        versionName LIBRARY_VERSION
+        versionCode getBuildNumber()
+    }
 }
 
 def isReleaseBuild() {
     return LIBRARY_VERSION.contains("SNAPSHOT") == false
+}
+
+def getBuildNumber() {
+    return "git log --pretty=format:''".execute().text.readLines().size()
 }
 
 def getReleaseRepositoryUrl() {
