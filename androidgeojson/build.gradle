@@ -31,6 +31,28 @@ def getRepositoryPassword() {
             (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
 }
 
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.bootClasspath.join(File.pathSeparator))
+    options.linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
+    exclude '**/R.html', '**/R.*.html'
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
 afterEvaluate { project ->
     uploadArchives {
         repositories {
