@@ -1,11 +1,14 @@
 package com.cocoahero.android.geojson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * The abstract interface of all GeoJSON objects.
+ */
 public abstract class GeoJSONObject implements Parcelable {
 
     // ------------------------------------------------------------------------
@@ -75,8 +78,21 @@ public abstract class GeoJSONObject implements Parcelable {
     // Public Methods
     // ------------------------------------------------------------------------
 
+    /**
+     * The type of GeoJSON object. This will be one of the constants defined in
+     * {@link GeoJSON}, such as {@link GeoJSON#TYPE_FEATURE}.
+     *
+     * @return The type of GeoJSON object.
+     */
     public abstract String getType();
 
+    /**
+     * Formats the object's attributes as GeoJSON.
+     *
+     * @return A GeoJSON formatted {@link JSONObject}
+     *
+     * @throws JSONException
+     */
     public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
 

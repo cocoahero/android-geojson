@@ -7,7 +7,6 @@ import org.json.JSONObject;
 /**
  * An intermediate, abstract class that acts as a common base for all GeoJSON
  * geometry types.
- * 
  */
 public abstract class Geometry extends GeoJSONObject {
 
@@ -33,6 +32,9 @@ public abstract class Geometry extends GeoJSONObject {
     // Public Methods
     // ------------------------------------------------------------------------
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject json = super.toJSON();

@@ -38,8 +38,8 @@ public class GeoJSON {
     // ------------------------------------------------------------------------
 
     /**
-     * Parses the given JSONObject as GeoJSON and returns a concrete subclass of {@link
-     * GeoJSONObject} corresponding to the type of the root object.
+     * Parses the given JSONObject as GeoJSON and returns a concrete subclass of
+     * {@link GeoJSONObject} corresponding to the type of the root object.
      * <p/>
      * Example:
      * <p/>
@@ -105,10 +105,33 @@ public class GeoJSON {
         throw new IllegalArgumentException("The type '" + type + "' is not a valid GeoJSON type.");
     }
 
+    /**
+     * Parses the given {@link String} into a {@link JSONObject}, and then
+     * passes it to {@link GeoJSON#parse(JSONObject)}.
+     *
+     * @param jsonString
+     *         A {@link String} to parse as GeoJSON
+     *
+     * @return A concrete subclass instance of {@link GeoJSONObject}.
+     *
+     * @throws JSONException
+     */
     public static GeoJSONObject parse(String jsonString) throws JSONException {
         return parse(new JSONObject(jsonString));
     }
 
+    /**
+     * Parses the given {@link InputStream} into a {@link JSONObject}, and then
+     * passes it to {@link GeoJSON#parse(JSONObject)}.
+     *
+     * @param stream
+     *         An {@link InputStream} to parse as GeoJSON
+     *
+     * @return A concrete subclass instance of {@link GeoJSONObject}.
+     *
+     * @throws IOException
+     * @throws JSONException
+     */
     public static GeoJSONObject parse(InputStream stream) throws IOException, JSONException {
         return parse(StreamUtils.toString(stream));
     }
