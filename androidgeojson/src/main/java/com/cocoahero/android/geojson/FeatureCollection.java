@@ -1,14 +1,14 @@
 package com.cocoahero.android.geojson;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FeatureCollection extends GeoJSONObject {
 
@@ -28,10 +28,18 @@ public class FeatureCollection extends GeoJSONObject {
     // Constructors
     // ------------------------------------------------------------------------
 
+    /**
+     * Creates an empty feature collection.
+     */
     public FeatureCollection() {
         // Default Constructor
     }
 
+    /**
+     * Parses the given {@link JSONObject} as a feature collection.
+     *
+     * @param json
+     */
     public FeatureCollection(JSONObject json) {
         super(json);
 
@@ -66,18 +74,41 @@ public class FeatureCollection extends GeoJSONObject {
     // Public Methods
     // ------------------------------------------------------------------------
 
+    /**
+     * Adds a {@link Feature} to this feature collection.
+     *
+     * @param feature
+     */
     public void addFeature(Feature feature) {
         this.mFeatures.add(feature);
     }
 
+    /**
+     * Removes a given {@link Feature} from this feature collection.
+     *
+     * @param feature
+     */
     public void removeFeature(Feature feature) {
         this.mFeatures.remove(feature);
     }
 
+    /**
+     * Returns a list of all the {@link Feature}s contained within this
+     * collection.
+     *
+     * @return the list of all {@link Feature}s in this collection
+     */
     public List<Feature> getFeatures() {
         return this.mFeatures;
     }
 
+    /**
+     * Sets the list of features contained within this feature collection. All
+     * previously existing features are removed as a result of setting this
+     * property.
+     *
+     * @param features
+     */
     public void setFeatures(List<Feature> features) {
         this.mFeatures.clear();
         if (features != null) {
@@ -85,11 +116,17 @@ public class FeatureCollection extends GeoJSONObject {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getType() {
         return GeoJSON.TYPE_FEATURE_COLLECTION;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject json = super.toJSON();

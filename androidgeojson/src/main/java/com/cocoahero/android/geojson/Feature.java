@@ -1,12 +1,12 @@
 package com.cocoahero.android.geojson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.cocoahero.android.geojson.util.JSONUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Feature extends GeoJSONObject {
 
@@ -34,10 +34,18 @@ public class Feature extends GeoJSONObject {
     // Constructors
     // ------------------------------------------------------------------------
 
+    /**
+     * Creates an empty Feature without a geometry.
+     */
     public Feature() {
         // Default Constructor
     }
 
+    /**
+     * Parses the given {@link JSONObject} as a GeoJSON Feature.
+     *
+     * @param json
+     */
     public Feature(JSONObject json) {
         super(json);
 
@@ -51,6 +59,11 @@ public class Feature extends GeoJSONObject {
         this.mProperties = json.optJSONObject(JSON_PROPERTIES);
     }
 
+    /**
+     * Creates a new GeoJSON Feature object with the given geometry.
+     *
+     * @param geometry
+     */
     public Feature(Geometry geometry) {
         this.mGeometry = geometry;
     }
@@ -75,35 +88,72 @@ public class Feature extends GeoJSONObject {
     // Public Methods
     // ------------------------------------------------------------------------
 
+    /**
+     * The optional, common identifier of this feature.
+     *
+     * @return The common identifier of this feature, if set.
+     */
     public String getIdentifier() {
         return this.mIdentifier;
     }
 
+    /**
+     * Sets the optional, common identifier of this feature.
+     *
+     * @param identifier
+     */
     public void setIdentifier(String identifier) {
         this.mIdentifier = identifier;
     }
 
+    /**
+     * Returns the geometry of this feature. It will be a concrete instance of
+     * {@link Geometry}.
+     *
+     * @return the geometry of this feature, or null if not set.
+     */
     public Geometry getGeometry() {
         return this.mGeometry;
     }
 
+    /**
+     * Sets the {@link Geometry} of this feature.
+     *
+     * @param geometry
+     */
     public void setGeometry(Geometry geometry) {
         this.mGeometry = geometry;
     }
 
+    /**
+     * Returns the optional properties of this feature as JSON.
+     *
+     * @return the properties of this feature
+     */
     public JSONObject getProperties() {
         return this.mProperties;
     }
 
+    /**
+     * Sets the properties of this feature.
+     *
+     * @param properties
+     */
     public void setProperties(JSONObject properties) {
         this.mProperties = properties;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getType() {
         return GeoJSON.TYPE_FEATURE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject json = super.toJSON();
@@ -112,15 +162,13 @@ public class Feature extends GeoJSONObject {
 
         if (this.mGeometry != null) {
             json.put(JSON_GEOMETRY, this.mGeometry.toJSON());
-        }
-        else {
+        } else {
             json.put(JSON_GEOMETRY, JSONObject.NULL);
         }
 
         if (this.mProperties != null) {
             json.put(JSON_PROPERTIES, this.mProperties);
-        }
-        else {
+        } else {
             json.put(JSON_PROPERTIES, JSONObject.NULL);
         }
 
