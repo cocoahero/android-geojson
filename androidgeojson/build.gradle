@@ -31,6 +31,16 @@ def getRepositoryPassword() {
             (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
 }
 
+android.libraryVariants.all { variant ->
+    def jarTask = project.tasks.create(name: "jar${variant.name.capitalize()}", type: Jar) {
+        from variant.javaCompile.destinationDir
+        exclude "**/R.class"
+        exclude "**/BuildConfig.class"
+    }
+    jarTask.dependsOn variant.javaCompile
+    artifacts.add('archives', jarTask);
+}
+
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.bootClasspath.join(File.pathSeparator))
