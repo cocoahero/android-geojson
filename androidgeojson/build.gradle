@@ -1,6 +1,6 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 19
