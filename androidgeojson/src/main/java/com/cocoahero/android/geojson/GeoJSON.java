@@ -40,9 +40,8 @@ public class GeoJSON {
     /**
      * Parses the given JSONObject as GeoJSON and returns a concrete subclass of
      * {@link GeoJSONObject} corresponding to the type of the root object.
-     * <p/>
+     * <p>
      * Example:
-     * <p/>
      * <pre>
      * {
      *     "type": "Feature",
@@ -52,7 +51,7 @@ public class GeoJSON {
      *     },
      * }
      * </pre>
-     * <p/>
+     * <p>
      * The above GeoJSON would return an instance of {@link Feature}.
      *
      * @param json
