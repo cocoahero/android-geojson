@@ -6,7 +6,7 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 22
-        versionName LIBRARY_VERSION
+        versionName VERSION_NAME
         versionCode getBuildNumber()
     }
 
@@ -15,7 +15,7 @@ android {
 }
 
 def isReleaseBuild() {
-    return LIBRARY_VERSION.contains("SNAPSHOT") == false
+    return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
 def getBuildNumber() {
@@ -23,13 +23,11 @@ def getBuildNumber() {
 }
 
 def getReleaseRepositoryUrl() {
-    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL :
-            "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+    return "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 }
 
 def getSnapshotRepositoryUrl() {
-    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL :
-            "https://oss.sonatype.org/content/repositories/snapshots/"
+    return "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
 def getRepositoryUsername() {
@@ -82,7 +80,7 @@ afterEvaluate { project ->
 
                 pom.groupId = POM_GROUP_ID
                 pom.artifactId = POM_ARTIFACT_ID
-                pom.version = LIBRARY_VERSION
+                pom.version = VERSION_NAME
 
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(),
@@ -95,29 +93,29 @@ afterEvaluate { project ->
                 }
 
                 pom.project {
-                    name "Android GeoJSON"
-                    packaging "aar"
-                    description "Android GeoJSON Library"
-                    url "https://github.com/cocoahero/android-geojson"
+                    name POM_NAME
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    url POM_URL
 
                     scm {
-                        url "https://github.com/cocoahero/android-geojson"
-                        connection "scm:git:git@github.com:cocoahero/android-geojson.git"
-                        developerConnection "scm:git:git@github.com:cocoahero/android-geojson.git"
+                        url POM_SCM_URL
+                        connection POM_SCM_CONNECTION
+                        developerConnection POM_SCM_DEV_CONNECTION
                     }
 
                     licenses {
                         license {
-                            name "The MIT License"
-                            url "https://github.com/cocoahero/android-geojson/blob/master/LICENSE.md"
-                            distribution "repo"
+                            name POM_LICENCE_NAME
+                            url POM_LICENCE_URL
+                            distribution POM_LICENCE_DIST
                         }
                     }
 
                     developers {
                         developer {
-                            id "cocoahero"
-                            name "Jonathan Baker"
+                            id POM_DEVELOPER_ID
+                            name POM_DEVELOPER_NAME
                         }
                     }
                 }
