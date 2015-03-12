@@ -1,17 +1,17 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
-
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 19
         versionName LIBRARY_VERSION
         versionCode getBuildNumber()
     }
+
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
 }
 
 def isReleaseBuild() {
@@ -40,6 +40,16 @@ def getRepositoryUsername() {
 def getRepositoryPassword() {
     return hasProperty('PASSWORD') ? PASSWORD :
             (hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "")
+}
+
+android.libraryVariants.all { variant ->
+    def jarTask = project.tasks.create(name: "jar${variant.name.capitalize()}", type: Jar) {
+        from variant.javaCompile.destinationDir
+        exclude "**/R.class"
+        exclude "**/BuildConfig.class"
+    }
+    jarTask.dependsOn variant.javaCompile
+    artifacts.add('archives', jarTask);
 }
 
 task androidJavadocs(type: Javadoc) {
