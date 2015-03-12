@@ -5,12 +5,12 @@ apply plugin: 'com.android.library'
 android {
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionName LIBRARY_VERSION
         versionCode getBuildNumber()
     }
 
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 }
 
