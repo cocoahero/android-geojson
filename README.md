@@ -19,7 +19,7 @@ A complete GeoJSON implementation for Android.
 
 ````groovy
 dependencies {
-  compile 'com.cocoahero.android:geojson:1.0.+@aar'
+  compile 'com.cocoahero.android:geojson:1.0.1@jar'
 }
 ````
 
@@ -29,8 +29,8 @@ dependencies {
 <dependency>
   <groupId>com.cocoahero.android</groupId>
   <artifactId>geojson</artifactId>
-  <version>1.0.0</version>
-  <type>aar</type>
+  <version>1.0.1</version>
+  <type>jar</type>
 </dependency>
 ````
 
