@@ -82,17 +82,17 @@ catch (JSONException e) {
 }
 ````
 
-The returned object instance will be a subclass of [GeoJSONObject](./src/com/cocoahero/android/geojson/GeoJSONObject.java), depending on the `type` property of the GeoJSON.
+The returned object instance will be a subclass of [GeoJSONObject](./androidgeojson/src/main/java/com/cocoahero/android/geojson/GeoJSONObject.java), depending on the `type` property of the GeoJSON.
 
-* `"type": "Feature"` => [Feature](./src/com/cocoahero/android/geojson/Feature.java)
-* `"type": "FeatureCollection"` => [FeatureCollection](./src/com/cocoahero/android/geojson/FeatureCollection.java)
-* `"type": "Point"` => [Point](./src/com/cocoahero/android/geojson/Point.java)
-* `"type": "MultiPoint"` => [MultiPoint](./src/com/cocoahero/android/geojson/MultiPoint.java)
-* `"type": "LineString"` => [LineString](./src/com/cocoahero/android/geojson/LineString.java)
-* `"type": "MultiLineString"` => [MultiLineString](./src/com/cocoahero/android/geojson/MultiLineString.java)
-* `"type": "Polygon"` => [Polygon](./src/com/cocoahero/android/geojson/Polygon.java)
-* `"type": "MultiPolygon"` => [MultiPolygon](./src/com/cocoahero/android/geojson/MultiPolygon.java)
-* `"type": "GeometryCollection"` => [GeometryCollection](./src/com/cocoahero/android/geojson/GeometryCollection.java)
+* `"type": "Feature"` => [Feature](./androidgeojson/src/main/java/com/cocoahero/android/geojson/Feature.java)
+* `"type": "FeatureCollection"` => [FeatureCollection](./androidgeojson/src/main/java/com/cocoahero/android/geojson/FeatureCollection.java)
+* `"type": "Point"` => [Point](./androidgeojson/src/main/java/com/cocoahero/android/geojson/Point.java)
+* `"type": "MultiPoint"` => [MultiPoint](./androidgeojson/src/main/java/com/cocoahero/android/geojson/MultiPoint.java)
+* `"type": "LineString"` => [LineString](./androidgeojson/src/main/java/com/cocoahero/android/geojson/LineString.java)
+* `"type": "MultiLineString"` => [MultiLineString](./androidgeojson/src/main/java/com/cocoahero/android/geojson/MultiLineString.java)
+* `"type": "Polygon"` => [Polygon](./androidgeojson/src/main/java/com/cocoahero/android/geojson/Polygon.java)
+* `"type": "MultiPolygon"` => [MultiPolygon](./androidgeojson/src/main/java/com/cocoahero/android/geojson/MultiPolygon.java)
+* `"type": "GeometryCollection"` => [GeometryCollection](./androidgeojson/src/main/java/com/cocoahero/android/geojson/GeometryCollection.java)
 
 #### Creating GeoJSON
 
