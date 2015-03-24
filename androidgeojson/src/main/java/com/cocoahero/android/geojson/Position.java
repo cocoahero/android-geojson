@@ -126,7 +126,7 @@ public class Position implements Parcelable {
     }
 
     public boolean hasAltitude() {
-        return mStorage[ALT_IDX] != Double.NaN;
+        return !Double.isNaN(mStorage[ALT_IDX]);
     }
 
     public JSONArray toJSON() throws JSONException {
