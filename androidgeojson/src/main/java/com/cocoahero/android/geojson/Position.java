@@ -1,13 +1,13 @@
 package com.cocoahero.android.geojson;
 
-import java.util.Arrays;
+import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.location.Location;
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.Arrays;
 
 public class Position implements Parcelable {
 
@@ -32,38 +32,39 @@ public class Position implements Parcelable {
     // ------------------------------------------------------------------------
 
     public Position(JSONArray array) {
-        this.mStorage[LON_IDX] = array.optDouble(LON_IDX, 0);
-        this.mStorage[LAT_IDX] = array.optDouble(LAT_IDX, 0);
-        this.mStorage[ALT_IDX] = array.optDouble(ALT_IDX, 0);
+        mStorage[LON_IDX] = array.optDouble(LON_IDX, 0.0);
+        mStorage[LAT_IDX] = array.optDouble(LAT_IDX, 0.0);
+        mStorage[ALT_IDX] = array.optDouble(ALT_IDX, Double.NaN);
     }
 
     public Position(double[] array) {
-        if (array.length == 2) {
-            this.mStorage[LON_IDX] = array[LON_IDX];
-            this.mStorage[LAT_IDX] = array[LAT_IDX];
-        }
-        else if (array.length == 3) {
-            this.mStorage[LON_IDX] = array[LON_IDX];
-            this.mStorage[LAT_IDX] = array[LAT_IDX];
-            this.mStorage[ALT_IDX] = array[ALT_IDX];
+        mStorage[LON_IDX] = array[LON_IDX];
+        mStorage[LAT_IDX] = array[LAT_IDX];
+        if (array.length == 3) {
+            mStorage[ALT_IDX] = array[ALT_IDX];
+        } else {
+            mStorage[ALT_IDX] = Double.NaN;
         }
     }
 
     public Position(double latitude, double longitude) {
-        this.mStorage[LAT_IDX] = latitude;
-        this.mStorage[LON_IDX] = longitude;
+        this(latitude, longitude, Double.NaN);
     }
 
     public Position(double latitude, double longitude, double altitude) {
-        this.mStorage[LAT_IDX] = latitude;
-        this.mStorage[LON_IDX] = longitude;
-        this.mStorage[ALT_IDX] = altitude;
+        mStorage[LAT_IDX] = latitude;
+        mStorage[LON_IDX] = longitude;
+        mStorage[ALT_IDX] = altitude;
     }
 
     public Position(Location location) {
-        this.mStorage[LAT_IDX] = location.getLatitude();
-        this.mStorage[LON_IDX] = location.getLongitude();
-        this.mStorage[ALT_IDX] = location.getAltitude();
+        mStorage[LAT_IDX] = location.getLatitude();
+        mStorage[LON_IDX] = location.getLongitude();
+        if (location.hasAltitude()) {
+            mStorage[ALT_IDX] = location.getAltitude();
+        } else {
+            mStorage[ALT_IDX] = Double.NaN;
+        }
     }
 
     private Position(Parcel parcel) {
@@ -93,7 +94,7 @@ public class Position implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDoubleArray(this.mStorage);
+        dest.writeDoubleArray(mStorage);
     }
 
     // ------------------------------------------------------------------------
@@ -101,35 +102,41 @@ public class Position implements Parcelable {
     // ------------------------------------------------------------------------
 
     public double getLatitude() {
-        return this.mStorage[LAT_IDX];
+        return mStorage[LAT_IDX];
     }
 
     public void setLatitude(double latitude) {
-        this.mStorage[LAT_IDX] = latitude;
+        mStorage[LAT_IDX] = latitude;
     }
 
     public double getLongitude() {
-        return this.mStorage[LON_IDX];
+        return mStorage[LON_IDX];
     }
 
     public void setLongitude(double longitude) {
-        this.mStorage[LON_IDX] = longitude;
+        mStorage[LON_IDX] = longitude;
     }
 
     public double getAltitude() {
-        return this.mStorage[ALT_IDX];
+        return mStorage[ALT_IDX];
     }
 
     public void setAltitude(double altitude) {
-        this.mStorage[ALT_IDX] = altitude;
+        mStorage[ALT_IDX] = altitude;
+    }
+
+    public boolean hasAltitude() {
+        return mStorage[ALT_IDX] != Double.NaN;
     }
 
     public JSONArray toJSON() throws JSONException {
         JSONArray coordinates = new JSONArray();
 
-        coordinates.put(LAT_IDX, this.getLatitude());
-        coordinates.put(LON_IDX, this.getLongitude());
-        coordinates.put(ALT_IDX, this.getAltitude());
+        coordinates.put(LAT_IDX, getLatitude());
+        coordinates.put(LON_IDX, getLongitude());
+        if (hasAltitude()) {
+            coordinates.put(ALT_IDX, getAltitude());
+        }
 
         return coordinates;
     }
@@ -137,15 +144,20 @@ public class Position implements Parcelable {
     public Location toLocation() {
         Location location = new Location("GeoJSON");
 
-        location.setLatitude(this.getLatitude());
-        location.setLongitude(this.getLongitude());
-        location.setAltitude(this.getAltitude());
+        location.setLatitude(getLatitude());
+        location.setLongitude(getLongitude());
+        if (hasAltitude()) {
+            location.setAltitude(getAltitude());
+        }
 
         return location;
     }
 
     public double[] toArray() {
-        return this.mStorage;
+        if (hasAltitude()) {
+            return mStorage.clone();
+        }
+        return new double[]{mStorage[LON_IDX], mStorage[LAT_IDX]};
     }
 
     @Override
@@ -160,17 +172,17 @@ public class Position implements Parcelable {
 
         Position aPosition = (Position) object;
 
-        return Arrays.equals(this.mStorage, aPosition.mStorage);
+        return Arrays.equals(mStorage, aPosition.mStorage);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(this.mStorage);
+        return Arrays.hashCode(mStorage);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(this.mStorage);
+        return Arrays.toString(toArray());
     }
 
 }
