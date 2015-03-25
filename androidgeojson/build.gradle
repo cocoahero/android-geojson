@@ -14,10 +14,6 @@ android {
     buildToolsVersion "21.1.2"
 }
 
-dependencies {
-    testCompile 'junit:junit:4.12'
-}
-
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
 }
