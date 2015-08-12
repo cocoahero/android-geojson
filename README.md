@@ -53,7 +53,7 @@ Once you have your GeoJSON in one of the above formats, simply pass it to `GeoJS
 String string; // A string containing GeoJSON
 
 try {
-    GeoJSONObject geoJSON; = GeoJSON.parse(string);
+    GeoJSONObject geoJSON = GeoJSON.parse(string);
 }
 catch (JSONException e) {
     e.printStackTrace();
@@ -64,7 +64,7 @@ catch (JSONException e) {
 ````java
 JSONObject json; // A JSONObject formatted as GeoJSON
 
-GeoJSONObject geoJSON; = GeoJSON.parse(json);
+GeoJSONObject geoJSON = GeoJSON.parse(json);
 ````
 
 ##### InputStream
@@ -72,7 +72,7 @@ GeoJSONObject geoJSON; = GeoJSON.parse(json);
 InputStream stream; // An InputStream pointing to GeoJSON
 
 try {
-    GeoJSONObject geoJSON; = GeoJSON.parse(stream);
+    GeoJSONObject geoJSON = GeoJSON.parse(stream);
 }
 catch (IOException e) {
     e.printStackTrace();
